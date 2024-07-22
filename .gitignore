@@ -1,4 +1,5 @@
 .root
+lvim_config.lua
 
 c/**/bin/
 .clangd
