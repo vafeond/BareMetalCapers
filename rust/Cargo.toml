@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+
+members = [
+  "hal/mcu/common",
+  "hal/mcu/samd21",
+  "hal/board/redboardturbo"
+]
+
+[workspace.dependencies]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+

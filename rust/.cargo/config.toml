@@ -1,0 +1,13 @@
+[build]
+target = "thumbv6m-none-eabi"
+
+[target.thumbv6m-none-eabi]
+rustflags = [
+  # path of INCLUDEd linker.ld script, must be before root linker script
+  "-C", 
+  "link-arg=-Lhal/mcu/samd21",
+  # path of root linker script
+  "-C",
+  "link-arg=-Thal/mcu/samd21/linker_bootloader_none.ld"
+]
+

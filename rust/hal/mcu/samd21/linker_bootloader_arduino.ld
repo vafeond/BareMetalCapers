@@ -1,0 +1,46 @@
+/******************************************************************************
+ *  This is free and unencumbered software released into the public domain.
+ *
+ *  Anyone is free to copy, modify, publish, use, compile, sell, or
+ *  distribute this software, either in source code form or as a compiled
+ *  binary, for any purpose, commercial or non-commercial, and by any
+ *  means.
+ *
+ *  In jurisdictions that recognize copyright laws, the author or authors
+ *  of this software dedicate any and all copyright interest in the
+ *  software to the public domain. We make this dedication for the benefit
+ *  of the public at large and to the detriment of our heirs and
+ *  successors. We intend this dedication to be an overt act of
+ *  relinquishment in perpetuity of all present and future rights to this
+ *  software under copyright law.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ *  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ *  IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ *  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ *  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *  OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  For more information, please refer to <https://unlicense.org>
+ */
+
+/* references
+ * https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_chapter/ld_3.html
+ * https://mcyoung.xyz/2021/06/01/linker-script/
+ * https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42366-SAM-BA-Bootloader-for-SAM-D21_ApplicationNote_AT07175.pdf
+ * - SAM-BA bootloader 4k or 8k, Arduino bootloader is 8k
+ */
+
+MEMORY
+{
+  /* Product Mapping: Internal Flash: 0x00000000-0x0004000
+   * Leave 8K for Arduino bootloader 
+   */ 
+  flash (rx)  : ORIGIN = 0x00000000+8K, LENGTH = 256K-8K
+  /* Product Mapping: Internal SRAM: 0x20000000-0x20007FFF */
+  sram  (rwx) : ORIGIN = 0x20000000, LENGTH = 32K
+}
+
+INCLUDE linker.ld
+
