@@ -25,7 +25,7 @@ With an abundance of cheap hardware, and free software, documentation,
 and community support, a "from scratch" microcontroller software project is
 more accessible than ever.
 
-Bare metal and "from scratch" compliment nicely. You can't get much more
+"Bare metal" and "from scratch" compliment nicely. You can't get much more
 "from scratch" when starting with just a microcontroller, its datasheet, 
 and a compiler (or assembler if really keen).
 
@@ -34,12 +34,12 @@ prevent/reverse attrophy. But, I also recognize I routinely stand on the
 shoulders of giants when using freely available software. So, I put this out 
 there for anyone who might find it useful. 
 
-Why is this a caper? In some cases the solutions here, due to their
-contrived or simplistic nature, will be ridiculous.
+Why caper? In some cases the solutions here, due to their contrived or 
+simplistic nature, will be ridiculous.
 
 ## License  
 [Unlicense](https://unlicense.org) for all code and code snippets within the 
 guides.  
-[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) for the guides (sans 
-code snippets). 
+[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) for the guides, 
+except code snippets. 
 
