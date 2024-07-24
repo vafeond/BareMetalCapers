@@ -17,7 +17,7 @@ The embedded "Hello World!" program demonstrates:
   - Installs a reset handler function
   - Establishes a stack pointer
 - The program is correctly laid out for the target address space (linker configuration)
-- A compatible programmer or bootloader is used, and programming/uploading a user-generated binary to the target system is successful: 
+- A compatible programmer or boot loader is used, and programming/uploading a user-generated binary to the target system is successful: 
   - The physical connection to the target is sufficient (soldering might be needed)
   - Target system "fuses" that may prevent programming are disabled
   - The host system software is correctly installed and configured (e.g. programming/uploading application, drivers)
@@ -163,8 +163,8 @@ For a great explaination of linker script see [mcyoung's article](https://mcyoun
 
 The SAMD21 linker scripts provided support two application mappings:
 1. The application can use all of the flash memory
-2. The *SparkFun RedBoard Turbo bootloader* occupies the first 8kb of flash, meaning the application
-is positioned after the bootloader
+2. The *SparkFun RedBoard Turbo boot loader* occupies the first 8kb of flash, meaning the application
+is positioned after the boot loader
 
 The top-level linker script specifies the available flash and then includes the common
 linker script `linker.ld`. This allows the desired configuration to be easily selected
@@ -178,8 +178,8 @@ The linker script handles the main stack pointer entirely, computing its address
 the ISR Vector Table.
 
 Validating a linker script can be tricky. One way is to use `objdump` tool to manually 
-reconcile the sections and symbols from all objects against the generated ELF file. 
-- `c`: I use that tool so frequently enough to warrant adding support in the build system (see `dump`
+reconcile the sections and symbols from all objects against the generated `ELF` file. 
+- `c`: I use that tool frequently enough to warrant adding support in the build system (see `dump`
 section in [`c/build/README.md`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/README.md)).
 - `Rust`'s Cargo has an extension to invoke `objdump`. 
   - The project's [Docker](https://github.com/vafeond/BareMetalCapers/blob/main/rust/Dockerfile) 
@@ -200,25 +200,25 @@ Where the application code and linker scripts have been deliberately minimized, 
 system has not. It's customized from another personal project and is quite flexible 
 and extensible, but complex compared to starter `make` scripts.
 
-I've no intent to dive into `make` and build systems here, but there is a `README.md` for
-anyone wishing to use it. For this application the relevent commands are:
-- `make ARCH=samd21`, build the application for SAMD21 CPU, no bootloader
-- `make ARCH=samd21 BOOTLOADER=Arduino`, same as above but for Arduino bootloader
+I've no intent to dive into `make` and build systems here, but there is a [`README.md`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/README.md) 
+for anyone wishing to use it. For this application the relevent commands are:
+- `make ARCH=samd21`, build the application for SAMD21 CPU, no boot loader
+- `make ARCH=samd21 BOOTLOADER=Arduino`, same as above but for Arduino boot loader
 
 These commands can be run from the repository root directory, or from the application
 directory [`c/RedBoardTurbo/blinking_blue_led`](https://github.com/vafeond/BareMetalCapers/tree/wip/c/RedBoardTurbo/blinking_blue_led).
 
-Upon success build artifacts are written to `c/RedBoardTurbo/blinking_blue_led/bin/debug/sam21`.
+Upon success build artifacts are written to `c/hasl/board/RedBoardTurbo/blinking_blue_led/bin/debug/sam21`.
 
 Three versions of the executable are created:
-1. `redboard_turbo_blinking_blue_led.elf`
-2. `redboard_turbo_blinking_blue_led.hex`, use when programming with Seggar programmer (Microchip Studio)
-3. `redboard_turbo_blinking_blue_led.bin`, use when uploading with Sparkfun BOSSA GUI (with Arduino bootloader)
+1. `c_blinking_blue_led.elf`
+2. `c_blinking_blue_led.hex`, use when programming with Seggar programmer (Microchip Studio)
+3. `c_blinking_blue_led.bin`, use when uploading with Sparkfun BOSSA GUI (with Arduino boot loader)
 
 ### Compiler Configuration
 
-`Makefile_Config.mk` contains common compiler flags.
-`c/hal/mcu/<mcu name>/Makefile_platform.mk` contains architecture-specific compiler flags that overwrite common compiler flags
+`Makefile_Config.mk` contains common compiler flags.  
+`c/hal/mcu/<mcu name>/Makefile_platform.mk` contains architecture-specific compiler flags that overwrite common compiler flags.
 
 See
 - [`c/build/Makefile_config.mk`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/Makefile_Config.mk)
@@ -232,5 +232,4 @@ modified and programmed/uploaded to the target.
 
 Once the development setup is validated, arguably the largest hurdle to bare metal embedded
 projects is overcome.
-
 
