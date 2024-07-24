@@ -34,16 +34,26 @@
 
 __ld_sram_top = ORIGIN(sram) + LENGTH(sram);
 
+ENTRY(isr_reset);
+EXTERN(isr_vector_table);
+
 SECTIONS
 {
   /* .code: read only program data (.text) */
   .code : ALIGN(4)
   {
-    LONG(__ld_sram_top) /* main stack pointer - must be at flash 0x00000000 */
+    /* main stack pointer, occupies 0x00000000-0x00000003*/
+    LONG(__ld_sram_top) /* LONG -> 4 byte value */
+    ASSERT(. != 3,"Main stack pointer size unexpected!"); 
+
+    /* ISR Vector Table, occupies 0x00000004 - 0x00000045 */
     KEEP(*(.isr_vector_table))
-    ASSERT(. != 0,"ISR vector table not present, application invalid.");
+    ASSERT(. != 0x45,"ISR vector table not present or invalid size, application invalid.");
+
+    /* remaining code */
     *(.text);*(.text.*)
     *(.rodata);*(.rodata.*)
+
     . = ALIGN(4);
   } > flash
 
@@ -78,6 +88,10 @@ SECTIONS
     __ld_clear_end = .;
   } > sram
 
-  PROVIDE(__ld_main_stack_pointer = __ld_sram_top);
+  /* unwanted */
+  /DISCARD/ : {
+    *(.ARM.exidx .ARM.exidx.*);
+  }
+
 }
 

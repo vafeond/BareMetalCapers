@@ -6,8 +6,8 @@
 Bare metal programming on ARM Cortex-M0+ using 
 [SparkFun RedBoard Turbo](https://www.sparkfun.com/products/14812).
 
-The repo contains code oriented towards embedded systems using RedBoard
-Turbo as the hardware platform. The guides provide details for those wishing 
+The repo contains code oriented towards embedded systems using *RedBoard
+Turbo* as the hardware platform. The guides provide details for those wishing 
 to learn more about embedded and bare metal programming.
 
 ## Quickstarts 
@@ -25,21 +25,21 @@ With an abundance of cheap hardware, and free software, documentation,
 and community support, a "from scratch" microcontroller software project is
 more accessible than ever.
 
-Bare metal and "from scratch" compliment nicely. You can't get much more
+"Bare metal" and "from scratch" compliment nicely. You can't get much more
 "from scratch" when starting with just a microcontroller, its datasheet, 
 and a compiler (or assembler if really keen).
 
-I'm doing this for fun, and to exercise the embedded muscles and 
+So, I'm doing this for fun and to exercise the embedded muscles and 
 prevent/reverse attrophy. But, I also recognize I routinely stand on the 
-shoulders of giants when using freely available software. So, I put this out 
-there for anyone who might find it useful. 
+shoulders of giants when using freely available software; therefore I put this 
+out there for anyone who might find it useful. 
 
-Why is this a caper? In some cases the solutions here, due to their
-contrived or simplistic nature, will be ridiculous.
+Why caper? In some cases the solutions here, due to their contrived or 
+simplistic nature, will be ridiculous.
 
 ## License  
 [Unlicense](https://unlicense.org) for all code and code snippets within the 
 guides.  
-[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) for the guides (sans 
-code snippets). 
+[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) for the guides, 
+except code snippets. 
 

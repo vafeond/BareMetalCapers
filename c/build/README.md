@@ -30,22 +30,6 @@ application and run it where possible (not cross-compiled)
 - `make dump OBJ=<path to object>`: Convenience target to show object symbol 
 information.
 
-### Sanitizers
-- To enable supported sanitizers set `SANITIZE` variable when invoking `make`, 
-for example:
-    - `make test SANITIZE=address:leak` enable address and leak sanitizers
-- List supported sanitizers as a colon-separated-value
-- Supported sanitizers are:
-    - `address`
-    - `leak`
-    - `thread`
-- Some combinations of sanitizers are invalid, generating an error from the 
-compiler or linker if specified together
-- Generated objects are stored in `bin` subdirectory specific to the other 
-specified targets (e.g. `release`) and combination of sanitizers
-- Selection method intended to be used by developers or combination of runs 
-performed by CI
-
 ## Input Variables  
 - `ARCH=<platform>`, builds for specified architecture, cross-compiling if 
 neccesary

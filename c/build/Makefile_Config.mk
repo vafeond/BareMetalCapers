@@ -84,31 +84,8 @@ CPPFLAGS=-DNDEBUG $(CPPFLAGS_COMMON) $(CPPFLAGS_EXTRA)
 LFLAGS=$(LFLAGS_COMMON) $(LFLAGS_EXTRA)
 endif
 
-# add sanitizers, comma separated list passed in like "SANITIZE=address:leak"
-SANITIZER_LIST:=$(subst :, ,$(SANITIZE))
-ifneq (,$(filter address,$(SANITIZER_LIST)))
-CONFIG:=$(CONFIG)sanitizeaddress
-CFLAGS_SANITIZE:=$(CFLAGS_SANITIZE) -fsanitize=address
-LFLAGS_SANITIZE:=$(LFLAGS_SANITIZE) -fsanitize=address
-endif
-ifneq (,$(filter leak,$(SANITIZER_LIST)))
-CONFIG:=$(CONFIG)sanitizeleak
-# CFLAGS_SANITIZE=-fsanitize=leak
-LFLAGS_SANITIZE:=$(LFLAGS_SANITIZE) -fsanitize=leak
-endif
-ifneq (,$(filter thread,$(SANITIZER_LIST)))
-CONFIG:=$(CONFIG)sanitizethread
-CFLAGS_SANITIZE:=$(CFLAGS_SANITIZE) -fsanitize=thread
-LFLAGS_SANITIZE:=$(LFLAGS_SANITIZE) -fsanitize=thread
-endif
-ifneq (,$(filter useafterscope,$(SANITIZER_LIST)))
-CONFIG:=$(CONFIG)sanitizeuseafterscope
-CFLAGS_SANITIZE:=$(CFLAGS_SANITIZE) -fsanitize-address-use-after-scope
-LFLAGS_SANITIZE:=$(LFLAGS_SANITIZE) -fsanitize-address-use-after-scope
-endif
-
 BIN_PATH:=bin
-BIN_CONFIG_PATH:=bin/$(CONFIG)/$(ARCH)
+BIN_CONFIG_PATH:=$(BIN_PATH)/$(CONFIG)/$(ARCH)
 # binary config padding is needed to support extra_sources which has
 # a relative path that contains ../, so need to add some depth to
 # binary directory structure so the created artifacts (e.g. objects and deps) 

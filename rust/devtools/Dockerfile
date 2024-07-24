@@ -23,40 +23,24 @@
 #
 #  For more information, please refer to <https://unlicense.org>
 
-ifeq (,$(BUILD_ROOT))
-$(error Must be included in Makefile heirarchy where an ancestor Makefile has detected the build system root relative path and sets it to BUILD_ROOT)
-endif
+ARG IMAGE_NAME
 
-include $(BUILD_ROOT)Makefile_Config.mk
-include $(BUILD_ROOT)Makefile_GatherSources.mk
-include $(BUILD_ROOT)Makefile_DepsHead.mk
+FROM $IMAGE_NAME as base
 
-ifeq (,$(TARGET))
-$(error Invoking Makefile must set TARGET)
-endif
-TARGET_FULL_PATH:=$(BIN_CONFIG_PATH)/$(TARGET)
+ARG DEBIAN_FRONTEND=noninteractive
 
-$(TARGET_FULL_PATH): hal $(OBJECTS_FULL_PATH) $(EXTRA_OBJECTS_FULL_PATH)
-	$(info )
-	$(info [ $(EXECUTABLE_VARIANT) Executable ] =============================================)
-	$(info TARGET    : $(TARGET))
-	$(info CONFIG    : $(CONFIG))
-	$(info ARCH      : $(ARCH))
-	$(info LINKER    : $(LINKER))
-	$(info SOURCES   : $(SOURCES))
-	$(info SYSLIBS   : $(SYSLIBS))
-	$(info BOOTLOADER: $(BOOTLOADER))
-	$(info )
-	$(LINK_COMMAND_EXE) 
-	$(LINK_COMMAND_EXE_CMDARG)
+ENV LANG=C.UTF-8
 
-$(BIN_CONFIG_PATH)/obj/$(BIN_CONFIG_PAD)%.o : %.$(EXT)
-	mkdir -p $(@D)
-	mkdir -p $(dir $(DEPDIR)/$*.d)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) $(addprefix -I,$(INCLUDE_PATHS)) $(addprefix -I,$(EXTRA_SOURCE_INCLUDE_PATHS_RESOLVED)) -c -o $@ $<
+RUN apt-get update
+RUN apt-get install -y wget
+RUN apt-get install -y curl
 
-hal:
-	make -C $(BUILD_ROOT)../hal/mcu/$(ARCH) $(MAKECMDGOALS)
 
-# must be last
-include $(BUILD_ROOT)Makefile_DepsTail.mk
+#==========================
+# neovim
+RUN wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz
+RUN mkdir /home/nvim
+RUN mv nvim-linux64.tar.gz /home/nvim
+RUN cd /home/nvim; tar -xf nvim-linux64.tar.gz
+RUN ln -s /home/nvim/nvim-linux64/bin/nvim /usr/bin/nvim
+
