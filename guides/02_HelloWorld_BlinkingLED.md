@@ -36,7 +36,7 @@ already wired up, including a blue LED connected to I/O pin `PA17` (see the *Red
 graphical datasheet).
 
 ## Design?  
-Design is thinking it through enougha before starting. The right amount of design saves time and 
+Design is thinking it through enough before starting. The right amount of design saves time and 
 frustration. Too much design is wasteful. What's in a design? How much is enough?
 
 A design typically consists of:
@@ -90,10 +90,10 @@ the I/O pin memory-mapped registers to configure `PA17` for output and toggle it
 periodically, making the *RedBoard Turbo* blue LED blink.
 
 ARMs PORT peripheral provides I/O pin convenience registers simplifying the application software.
-Specifically they only require setting of a single bit (bit 17 for `PA17`) to set, clear, or 
+Specifically, they only require setting of a single bit (bit 17 for `PA17`) to set, clear, or 
 toggle the corresponding pin state. This eliminates the need for application software to create 
-bitmasks for setting and clearing operations, and to reading or storing the current state of a 
-pin in order to set the alternate state (toggle).
+bitmasks for setting and clearing operations, and reading or storing of the current pin state
+in order to set the alternate state (toggle).
 
 The `blinking_blue_led` applications (linked below for each language) crudely determine the 
 addresses of PORT memory-mapped registers and interacts with them. No attempt is made to craft 
@@ -223,10 +223,6 @@ Three versions of the executable are created:
 See
 - [`c/build/Makefile_config.mk`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/Makefile_Config.mk)
 - [`c/hal/samd21/Makefile_platform.mk`](https://github.com/vafeond/BareMetalCapers/blob/main/c/hal/mcu/samd21/Makefile_platform.mk)
-
-#### Main
-The `main` function loops endlessly toggling PA17 periodically causing the blue LED to blink.
-
 
 
 ## Wrap Up
