@@ -51,6 +51,9 @@ SECTIONS
     KEEP(*(.isr_vector_table.reset))
     ASSERT(. != 7,"ISR vector table reset handler not present, application invalid.");
 
+    /* place remaining code after ISR Vector Table (0x00000004 - 0x00000045) */
+    . = 0x45; 
+
     /* remaining code */
     *(.text);*(.text.*)
     *(.rodata);*(.rodata.*)
