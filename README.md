@@ -29,10 +29,10 @@ more accessible than ever.
 "from scratch" when starting with just a microcontroller, its datasheet, 
 and a compiler (or assembler if really keen).
 
-I'm doing this for fun, and to exercise the embedded muscles and 
+So, I'm doing this for fun and to exercise the embedded muscles and 
 prevent/reverse attrophy. But, I also recognize I routinely stand on the 
-shoulders of giants when using freely available software. So, I put this out 
-there for anyone who might find it useful. 
+shoulders of giants when using freely available software; therefore I put this 
+out there for anyone who might find it useful. 
 
 Why caper? In some cases the solutions here, due to their contrived or 
 simplistic nature, will be ridiculous.
