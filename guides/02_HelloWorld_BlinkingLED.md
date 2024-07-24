@@ -124,7 +124,7 @@ initialize the reset vector in the ISR Vector Table.
 Additionally, the main stack pointer needs to be initialized, which is configured as the
 highest RAM address (the stack grows downwards), which is also part of the ISR Vector Table.
 
-SAMD21 ISR Vector Table:
+SAMD21 ISR Vector Table (abridged):
 - `0x00000000`: Main stack pointer (set to address in SRAM)
 - `0x00000004`: Reset handler pointer (set to address of `c` or `rust` function to run on system power on or reset)
 
