@@ -6,8 +6,8 @@
 Bare metal programming on ARM Cortex-M0+ using 
 [SparkFun RedBoard Turbo](https://www.sparkfun.com/products/14812).
 
-The repo contains code oriented towards embedded systems using RedBoard
-Turbo as the hardware platform. The guides provide details for those wishing 
+The repo contains code oriented towards embedded systems using *RedBoard
+Turbo* as the hardware platform. The guides provide details for those wishing 
 to learn more about embedded and bare metal programming.
 
 ## Quickstarts 

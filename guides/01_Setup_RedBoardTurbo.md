@@ -18,23 +18,26 @@ possible alternatives if I know of any.
 
 * *[Requirement]* Sparkfun RedBoard Turbo
   - Alternatives: 
-    - Many features will work on any *samd21* development board, but if not 
-    using the RedBoard Turbo features of this project specific to it will 
+    - Many features will work on any *SAMD21* development board, but if not 
+    using the *RedBoard Turbo* features of this project specific to it will 
     need modification
     - The Docker environment and build system could be a starting point for 
     any ARM-based project
 
 * *[Requirement]* Run the toolchain 
-  - My setup: Debian 12 desktop with `make`
+  - My setup: Debian 12 desktop with `make` (I do not use the Docker containers discussed below)
     - I `ssh` into the desktop from a laptop and attach to a `tmux` session 
     - `make` allows use of the project build system
-    - I use a custom linker script via build system variable 
-    `LINK_COMMAND_EXE_CMDARG` to copy generated executables to a NAS, where a
-    Windows laptop can download them for programming
+    - Development cutomizations:
+      - [`c`]: I use a custom linker script via build system variable `LINK_COMMAND_EXE_CMDARG` 
+      to copy executables to a NAS
+      - [`Rust`]: I extend `cargo-bbuild` with a command to copy executables to a NAS, 
+      renaming them with "rust_" prefix
+      - A Windows laptop can download executables from the NAS and run the programmer
   - Alternatives:
     - Any machine that can run Docker (use the provided Dockerfile)
         - Windows is a good choice if using the *Seggar EDU Mini* programmer,
-        though hopefully I can make a non-Windows option available
+        though hopefully I can make a non-Windows option available eventually
     - The toolchain [downloads page](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
       has executables for Windows, Linux, and Mac. Presumably an of 
       these will work as a host.
@@ -60,8 +63,8 @@ See language-specific quickstarts.
 - [`c`](https://github.com/vafeond/BareMetalCapers/blob/main/c/README.md)
 - [`Rust`](https://github.com/vafeond/BareMetalCapers/blob/main/rust/README.md)
 
-### Programming  
-See [SparkFun ARM programming guide](https://learn.sparkfun.com/tutorials/arm-programming). 
+### Programming
+If using *Seggar EDU Mini* see the [SparkFun ARM programming guide](https://learn.sparkfun.com/tutorials/arm-programming). 
 Some additional notes:
 - The application is *Microchip Studio*
 - Upon startup *Microchip Studio* prompts to download the XC8 compiler, this is NOT 
@@ -75,7 +78,7 @@ the button with an icon of a through hole IC and lightning bolt.
         - Restarting the board
         - Restarting *Microchip Studio*
         - Slightly holding/pressing the 2x5 header inserted into the 
-        *RedBoard Turbo* (if this is required consider soldering) 
+        *RedBoard Turbo* (if this is required consider soldering the header to the board) 
 
 ### Programmer vs. Boot Loader - Why is a programmer required?  
 Boot loaders eliminate the need for a programmer. Boot loaders take up a small 
@@ -91,13 +94,13 @@ as an alternative. It supports uploading `BIN` format executables using the
 pre-programmed bootloader.
 
 So far, I cannot use *SparkFun BOSSA GUI* and the *RedBoard Turbo boot loader* 
-to upload this project's more than once. After uploading the 
-executable neither the *Arduino IDE* nor the *SparkFun BOSSA GUI* detect the 
-*RedBoard Turbo*, and the bootloader must be re-programmed.
+to upload this project's executables more than once. After uploading the executable 
+neither the *Arduino IDE* nor the *SparkFun BOSSA GUI* detect the *RedBoard Turbo*, 
+and the boot loader must be re-programmed.
 
 It seems the created executables do not configure the device or its peripherals
 correctly to support the boot loader, though I beleived that would be the 
-responsibility of the bootloader itself, so I'm unsure why this doesn't work. 
+responsibility of the boot loader itself, so I'm unsure why this doesn't work. 
 In fairness, the *RedBoard Turbo boot loader* is intended to support *Arduino*, 
 so if the boot loader is deficient (and I'm not saying it is) then it isn't to 
 be blamed for a use case outside its scope.
@@ -107,6 +110,6 @@ boot loader incompatibility will become clear as I progress, but for now, a
 programmer is a necessary.
 
 I recommend getting a programmer anyway to restore the 
-[RedTurbo Board bootloader](https://github.com/sparkfun/Arduino_Boards/tree/main/sparkfun/samd/bootloaders/turbo) 
+[RedTurbo Board boot loader](https://github.com/sparkfun/Arduino_Boards/tree/main/sparkfun/samd/bootloaders/turbo) 
 if needed.
 

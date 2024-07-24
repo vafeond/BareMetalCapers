@@ -6,13 +6,16 @@
   found in [`c/build/Makefile_DevContainer.mk`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/Makefile_DevContainer.mk).
   If using the build system, the following can be run from the repository root 
   directory:
-  - `make cbuild`, `make ccreate`, `make cexec`
+  - `make cbuild`, `make ccreate`, `make cexec` (`sudo` might be needed to run Docker)
   - For more information see [`c/build/README.md`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/README.md)
+
+- If not using the Docker container, see [`c/Dockerfile`](https://github.com/vafeond/BareMetalCapers/blob/main/c/Dockerfile) 
+  for commands to configure your host system
 
 - From the `c` subdirectory, within the Docker container or not:
   - `make ARCH=samd21`, build SAMD21 debug binaries for all applications (see 
   below)
-  - Generated ELF, HEX, and BIN files are stored under the application's `bin`
+  - Generated `ELF`, `HEX`, and `BIN` files are stored under the application's `bin`
     subdirectory.
 
 **Applications**
