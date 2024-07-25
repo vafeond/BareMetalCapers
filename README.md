@@ -34,9 +34,6 @@ prevent/reverse attrophy. But, I also recognize I routinely stand on the
 shoulders of giants when using freely available software; therefore I put this 
 out there for anyone who might find it useful. 
 
-Why caper? In some cases the solutions here, due to their contrived or 
-simplistic nature, will be ridiculous.
-
 ## License  
 [Unlicense](https://unlicense.org) for all code and code snippets within the 
 guides.  

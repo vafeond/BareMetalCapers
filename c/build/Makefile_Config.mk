@@ -61,6 +61,20 @@ LFLAGS_EXTRA=
 # default linker command - assume host executable
 LINK_COMMAND_EXE = $(LINKER) -o $@ $(OBJECTS_FULL_PATH) $(EXTRA_OBJECTS_FULL_PATH) $(addprefix -l,$(SYSLIBS)) $(LFLAGS)
 
+# resolve board
+ifeq (,$(BOARD))
+# no BOARD provided, go with defaults
+else 
+# override shortcuts (e.g. rbt => RedBoardTurbo)
+ifeq (rbt,$(BOARD))
+override BOARD=RedBoardTurbo
+endif
+ifneq (,$(wildcard $(BUILD_ROOT)/../hal/board/$(BOARD)/Makefile_board.mk))
+include $(realpath $(BUILD_ROOT)/../hal/board/$(BOARD)/Makefile_board.mk)
+else
+$(error Unknown BOARD: $(BOARD))
+endif
+endif
 
 # resolve architecture
 ifeq (,$(ARCH))
@@ -85,7 +99,7 @@ LFLAGS=$(LFLAGS_COMMON) $(LFLAGS_EXTRA)
 endif
 
 BIN_PATH:=bin
-BIN_CONFIG_PATH:=$(BIN_PATH)/$(CONFIG)/$(ARCH)
+BIN_CONFIG_PATH:=$(BIN_PATH)/$(CONFIG)/$(ARCH)$(BOARD)
 # binary config padding is needed to support extra_sources which has
 # a relative path that contains ../, so need to add some depth to
 # binary directory structure so the created artifacts (e.g. objects and deps) 
