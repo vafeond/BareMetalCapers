@@ -25,5 +25,6 @@
 
 **Applications**
 - [`blinking_blue_led`](https://github.com/vafeond/BareMetalCapers/blob/main/rust/hal/board/redboardturbo/src/bin/blinking_blue_led.rs), minimal application validating development setup
+- [`my_first_comms`](https://github.com/vafeond/BareMetalCapers/blob/main/rust/hal/board/redboardturbo/src/bin/my_first_comms.rs), communication with host via USB
 
 For more information see `build/README.md`. 

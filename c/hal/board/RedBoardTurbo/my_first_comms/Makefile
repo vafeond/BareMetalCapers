@@ -23,7 +23,7 @@
 #
 #  For more information, please refer to <https://unlicense.org>
 
-TARGET=c_clock
+TARGET=c_my_first_comms
 
 # boilerplate for build support
 BUILD_ROOT:=$(dir $(wildcard $(addsuffix /build/Makefile_Config.mk, . .. ../.. ../../.. ../../../..)))

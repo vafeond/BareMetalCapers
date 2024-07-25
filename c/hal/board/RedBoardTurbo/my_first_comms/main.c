@@ -44,8 +44,10 @@ int main ( void )
 {
   uint32_t count = 0;
 
-  /* setup the clock */
+  /* setup the main clock */
   SYSCTR_OSC8M_8MHZ_SET;
+
+  /* setup a generic clock generator to clock USB peripheral */
   GCLK_GENERATOR_48MHZ_ENABLE(GCLK_CLK_GENERATOR_1,GCLK_CLKCTRL_ID_USB);
 
   PORT_PIN_DIR_OUT(A,17);
