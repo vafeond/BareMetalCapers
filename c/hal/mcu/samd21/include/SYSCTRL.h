@@ -33,37 +33,52 @@
 
 
 /******************************************************************************
- * OSC8M
- * 32-bit register controlling 8MHz oscillator
+ * 8MHz Internal Oscillator (OSC8M) Control
  */
 typedef struct {
   uint32_t :1;                    /* 0: unused */
-  volatile uint32_t ENABLE :1;             /* default: 1 */
+  volatile uint32_t ENABLE :1;    /* default: 1 */
   uint32_t :4;                    /* 2-5: unused */
-  volatile uint32_t RUNSTDBY:1;            /* default: 0 */
-  volatile uint32_t ONDEMAND:1;            /* default: 1*/
-  volatile uint32_t PRESC:2;               /* default: 0x3 (divide by eight) */
+  volatile uint32_t RUNSTDBY:1;   /* default: 0 */
+  volatile uint32_t ONDEMAND:1;   /* default: 1*/
+  volatile uint32_t PRESC:2;      /* default: 0x3 (divide by eight) */
   uint32_t :6;                    /* 10-15: unused */
   const uint32_t CALIB_TEMP:6;    /* written during manufacture, protecting from overwrite */
   const uint32_t CALIB_OVERALL:6; /* written during manufacture, protecting from overwrite */
   uint32_t :2;                    /* 28-29: unused */
   const uint32_t FRANGE:2;        /* written during manufacture, protecting from overwrite */
-} OSC8M_t;
+} SYSCTRL_OSC8M_t;
 
-enum OSC8M_Prescaler {
-  OSC8M_PRESCALER_DIVIDE_BY_ONE   = 0x0,
-  OSC8M_PRESCALER_DIVIDE_BY_TWO   = 0x1,
-  OSC8M_PRESCALER_DIVIDE_BY_FOUR  = 0x2,
-  OSC8M_PRESCALER_DIVIDE_BY_EIGHT = 0x3  /* default */
+enum SYSCTRL_OSC8M_Prescaler {
+  SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_ONE   = 0x0,
+  SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_TWO   = 0x1,
+  SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_FOUR  = 0x2,
+  SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_EIGHT = 0x3  /* default */
 };
 
-#define OSC8M_OFFSET 0x20
+#define SYSCTRL_OSC8M_OFFSET 0x20
 
-#define p_SYSCTRL_OSC8M ((OSC8M_t * const)(AHB_APB_BRIDGE_A_ADDRESS + SYSCTRL_OFFSET + OSC8M_OFFSET))
+#define p_SYSCTRL_OSC8M ((SYSCTRL_OSC8M_t * const)(AHB_APB_BRIDGE_A_ADDRESS + SYSCTRL_OFFSET + SYSCTRL_OSC8M_OFFSET))
 
-#define SYSCTR_OSC8M_8MHZ_SET p_SYSCTRL_OSC8M->PRESC=OSC8M_PRESCALER_DIVIDE_BY_ONE;
-#define SYSCTR_OSC8M_4MHZ_SET p_SYSCTRL_OSC8M->PRESC=OSC8M_PRESCALER_DIVIDE_BY_TWO;
-#define SYSCTR_OSC8M_2MHZ_SET p_SYSCTRL_OSC8M->PRESC=OSC8M_PRESCALER_DIVIDE_BY_FOUR;
-#define SYSCTR_OSC8M_1MHZ_SET p_SYSCTRL_OSC8M->PRESC=OSC8M_PRESCALER_DIVIDE_BY_EIGHT;
+#define SYSCTR_OSC8M_8MHZ_SET p_SYSCTRL_OSC8M->PRESC=SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_ONE;
+#define SYSCTR_OSC8M_4MHZ_SET p_SYSCTRL_OSC8M->PRESC=SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_TWO;
+#define SYSCTR_OSC8M_2MHZ_SET p_SYSCTRL_OSC8M->PRESC=SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_FOUR;
+#define SYSCTR_OSC8M_1MHZ_SET p_SYSCTRL_OSC8M->PRESC=SYSCTRL_OSC8M_PRESCALER_DIVIDE_BY_EIGHT;
+
+
+/******************************************************************************
+ * DFLL48M Value
+ */
+typedef struct {
+  volatile uint32_t FINE:10;
+  volatile uint32_t COARSE:6;
+  const volatile uint32_t DIFF:16;
+} SYSCTRL_DFLLVAL_t;
+
+#define SYSCTRL_DFLLVAL_OFFSET 0x28
+
+#define p_SYSCTRL_DFLLVAL ((SYSCTRL_DFLLVAL_t * const)(AHB_APB_BRIDGE_A_ADDRESS + SYSCTRL_OFFSET + SYSCTRL_DFLLVAL_OFFSET))
+
+#define SYSCTR_DFLL_CAL_SET(calval,value) p_SYSCTRL_DFLLVAL->calval=value;
 
 #endif /* __SYSCTRL_H__ */
