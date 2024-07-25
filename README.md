@@ -17,6 +17,7 @@ to learn more about embedded and bare metal programming.
 ## Guides
 [Setup - RedBoard Turbo](https://github.com/vafeond/BareMetalCapers/blob/main/guides/01_Setup_RedBoardTurbo.md)  
 [Hello World! Blinking Blue LED](https://github.com/vafeond/BareMetalCapers/blob/main/guides/02_HelloWorld_BlinkingLED.md)
+[Hello World! My First Comms](https://github.com/vafeond/BareMetalCapers/blob/main/guides/02_HelloWorld_MyFirstComms.md)
 
 
 ## Why?
