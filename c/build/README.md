@@ -3,10 +3,10 @@ Build system infrastructure is stored in `<repo root>/build`
 
 **Examples**:
 - `make` debug binaries for host platform
-- `make ARCH=samd21` creates debug embedded application for samd21 architecture
+- `make BOARD=rbt` creates debug embedded application for *RedBoard Turbo*
 - `make BOOTLOADER=Arduino` creates debug application allowing room for Arduino 
 bootloader
-- `make ARCH=samd21 BOOTLOADER=Arduino` combination of above
+- `make BOARD=rbt BOOTLOADER=Arduino` combination of above
 
 ## Targets  
 Below are the make targets supported for each supported binary type. The 
@@ -31,11 +31,15 @@ application and run it where possible (not cross-compiled)
 information.
 
 ## Input Variables  
+- `BOARD=<board>`, builds for specified board, setting the appropriate `ARCH` and
+cross-compiling if neccesary
+    - Default: no board is set, typically this builds for host platform
+    - `rbt` or `RedBoardTurbo`, build embedded applications for *Sparkfun RedBoardTurbo*
 - `ARCH=<platform>`, builds for specified architecture, cross-compiling if 
 neccesary
     - Default: use default toolchain, typically this builds for host platform
-    - `samd21`, build embedded application for deployment to Sparkfun 
-    RedBoardTurbo
+    - `samd21`, build embedded applications for SAMD21 MCUs
+    - Note: Favor using `BOARD` instead of `ARCH`
 - `BOOTLOADER=<bootloader name>`, build embedded target allowing for the 
 selected bootloader
     - Default: no bootloader accounted for
@@ -44,8 +48,7 @@ selected bootloader
     - Default: <nothing>
     - I use to copy created hex binary to NAS for easy download and program on 
     Windows machine, similar to  
-        `LINK_COMMAND_EXE_CMDARG="cp \$@.hex <NAS path>"`  (Note escaping of `$`
-        )  
+    `LINK_COMMAND_EXE_CMDARG="cp \$@.hex <NAS path>"`  (Note escaping of `$`)  
 
 ## Adding a binary  
 - Follow an existing example for the type of binary you want to add, cloning and

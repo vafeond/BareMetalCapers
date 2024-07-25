@@ -202,18 +202,18 @@ and extensible, but complex compared to starter `make` scripts.
 
 I've no intent to dive into `make` and build systems here, but there is a [`README.md`](https://github.com/vafeond/BareMetalCapers/blob/main/c/build/README.md) 
 for anyone wishing to use it. For this application the relevent commands are:
-- `make ARCH=samd21`, build the application for SAMD21 CPU, no boot loader
-- `make ARCH=samd21 BOOTLOADER=Arduino`, same as above but for Arduino boot loader
+- `make BOARD=rbt`, build the application for *RedBoard Turbo*, no boot loader
+- `make BOARD=rbt BOOTLOADER=Arduino`, same as above but for Arduino boot loader
 
 These commands can be run from the repository root directory, or from the application
 directory [`c/RedBoardTurbo/blinking_blue_led`](https://github.com/vafeond/BareMetalCapers/tree/wip/c/RedBoardTurbo/blinking_blue_led).
 
-Upon success build artifacts are written to `c/hasl/board/RedBoardTurbo/blinking_blue_led/bin/debug/sam21`.
+Upon success build artifacts are written to `c/hal/board/RedBoardTurbo/blinking_blue_led/bin/debug/samd21RedBoardTurbo`.
 
 Three versions of the executable are created:
 1. `c_blinking_blue_led.elf`
-2. `c_blinking_blue_led.hex`, use when programming with Seggar programmer (Microchip Studio)
-3. `c_blinking_blue_led.bin`, use when uploading with Sparkfun BOSSA GUI (with Arduino boot loader)
+2. `c_blinking_blue_led.hex`, use when programming with Seggar programmer (via *Microchip Studio*)
+3. `c_blinking_blue_led.bin`, use when uploading with *Sparkfun BOSSA GUI* (with Arduino boot loader)
 
 ### Compiler Configuration
 
